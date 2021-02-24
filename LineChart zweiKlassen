@@ -1,0 +1,67 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    TestZeit testZeit = new TestZeit();
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Line - Chart");
+
+        CategoryAxis xAxis = new CategoryAxis();
+
+        NumberAxis yAxis = new NumberAxis();
+
+        LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+
+        XYChart.Data<String, Number> data3 = new XYChart.Data<String, Number>("VarianteC", testZeit.getLaufGesamt());
+        series1.getData().addAll(data3);
+        series1.setName(String.valueOf(testZeit.getLaufGesamt()));
+        lineChart.getData().add(series1);
+        
+
+        primaryStage.setScene(new Scene(lineChart));
+
+        primaryStage.show();
+
+    }
+}
+
+
+----------------------------------------------------------------------
+
+package testFx;
+
+public class TestZeit {
+
+    
+    public long getLaufGesamt() {
+
+        long startZeit = System.nanoTime();
+        for(int i = 0; i < 100; i++){
+            //
+        }
+        long endZeit = System.nanoTime();
+        long laufGesamt = endZeit - startZeit;
+
+        return laufGesamt;
+    }
+
+
+}
+

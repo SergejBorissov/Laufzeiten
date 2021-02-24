@@ -29,11 +29,12 @@ public class Main extends Application{
 
         XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
 
-        XYChart.Data<String, Number> data3 = new XYChart.Data<String, Number>("VarianteC", testZeit.getLaufGesamt());
-        series1.getData().addAll(data3);
+        XYChart.Data<String, Number> data3 = new XYChart.Data<String, Number>("LaufZeit1", testZeit.getLaufGesamt());
+        XYChart.Data<String, Number> data4 = new XYChart.Data<String, Number>("LaufZeit2", testZeit.getLaufGesamt2());
+        series1.getData().addAll(data3,data4);
         series1.setName(String.valueOf(testZeit.getLaufGesamt()));
         lineChart.getData().add(series1);
-        
+
 
         primaryStage.setScene(new Scene(lineChart));
 
@@ -42,14 +43,13 @@ public class Main extends Application{
     }
 }
 
-
-----------------------------------------------------------------------
+----------------------------------------------------
 
 package testFx;
 
 public class TestZeit {
 
-    
+
     public long getLaufGesamt() {
 
         long startZeit = System.nanoTime();
@@ -62,6 +62,18 @@ public class TestZeit {
         return laufGesamt;
     }
 
+    public long getLaufGesamt2() {
+
+        long startZeit = System.nanoTime();
+        for(int i = 0; i < 10000000; i++){
+            //
+        }
+        long endZeit = System.nanoTime();
+        long laufGesamt = endZeit - startZeit;
+
+        return laufGesamt;
+    }
 
 }
+
 

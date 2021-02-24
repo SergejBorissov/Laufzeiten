@@ -1,0 +1,51 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Line - Chart");
+
+        final long laufStart = System.nanoTime();
+
+        //Für Strings eine Achse
+        CategoryAxis xAxis = new CategoryAxis();
+
+        //Für Zahlen eine Achse
+        NumberAxis yAxis = new NumberAxis();
+
+        LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+        final long laufEnd = System.nanoTime();
+
+        final long laufZeitGesamt = laufEnd - laufStart;
+        XYChart.Data<String, Number> data3 = new XYChart.Data<String, Number>("VarianteC", laufZeitGesamt);
+        series1.getData().addAll(data3);
+        series1.setName(String.valueOf(laufZeitGesamt));
+        lineChart.getData().add(series1);
+
+        // Parents kann man direkt in die Stage packen
+
+
+
+        primaryStage.setScene(new Scene(lineChart));
+
+        primaryStage.show();
+
+    }
+}

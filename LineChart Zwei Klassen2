@@ -1,0 +1,107 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    TestZeit testZeit = new TestZeit();
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Laufzeit von drei Schleifen");
+
+        HBox hBox = new HBox();
+
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        TextArea textArea = new TextArea();
+
+        LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+
+        XYChart.Data<String, Number> data1 = new XYChart.Data<String, Number>("LaufZeit1", testZeit.getLaufGesamt());
+        XYChart.Data<String, Number> data2 = new XYChart.Data<String, Number>("LaufZeit2", testZeit.getLaufGesamt2());
+        XYChart.Data<String, Number> data3 = new XYChart.Data<>("Laufzeit3", testZeit.getLaufGesamt3());
+        series1.getData().addAll(data1, data2, data3);
+        series1.setName(String.valueOf(testZeit.getLaufGesamt()));
+        lineChart.getData().add(series1);
+
+        textArea.setText("Laufzeit1: " + testZeit.getLaufGesamt() + "\n" + "Laufzeit2: " + testZeit.getLaufGesamt2() + "\n" +
+                                 "Laufzeit3: " + testZeit.getLaufGesamt3() );
+
+
+        hBox.getChildren().addAll(lineChart,textArea);
+
+
+        primaryStage.setScene(new Scene(hBox));
+
+        primaryStage.show();
+
+    }
+}
+
+-----------------------------------------------
+
+
+package testFx;
+
+public class TestZeit {
+
+
+    public long getLaufGesamt() {
+
+        long startZeit = System.nanoTime();
+        for(int i = 0; i < 200000; i++){
+            //
+        }
+        long endZeit = System.nanoTime();
+        long laufGesamt = endZeit - startZeit;
+
+        return laufGesamt;
+    }
+
+    public long getLaufGesamt2() {
+
+        long startZeit = System.nanoTime();
+        for(int i = 0; i < 10000000; i++){
+            //
+        }
+        long endZeit = System.nanoTime();
+        long laufGesamt = endZeit - startZeit;
+
+        return laufGesamt;
+    }
+
+    public long getLaufGesamt3(){
+        long startZeit = System.nanoTime();
+        int i = 0;
+        do{
+
+            i++;
+        } while ( i < 1000000);
+        long endZeit = System.nanoTime();
+        long laufGesamt = endZeit - startZeit;
+        return laufGesamt;
+
+    }
+
+
+
+}
+
+
